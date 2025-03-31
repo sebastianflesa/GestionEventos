@@ -49,32 +49,46 @@ public class EventosController {
         return "redirect:/eventos";
     }
     
-    @GetMapping("/eventos/editar")
-    public String editarEvento(@RequestParam("id") Long id, Model model) {
-        Evento evento = eventoRepository.findById(id).orElse(null);
-        if (evento != null) {
-            model.addAttribute("evento", evento);
-            return "editar_evento";
-        } else {
-            return "redirect:/eventos";
-        }
-    }
     
     @GetMapping("/eventos/ver/{id}")
     public String verEvento(@PathVariable("id") Long id, Model model) {
         Evento evento = eventoRepository.findById(id).orElse(null);
         if (evento != null) {
             model.addAttribute("evento", evento);
-            return "evento_ver"; // Asegúrate de que esta vista exista
+            return "evento_ver";
         } else {
             return "redirect:/eventos";
         }
-}
+    }
 
-    @GetMapping("/eventos/borrar")
-    public String borrarEvento(@RequestParam("id") Long id) {
-        eventoRepository.deleteById(id);
+    @GetMapping("/eventos/editar/{id}")
+    public String editarEvento(@PathVariable("id") Long id, Model model) {
+        Evento evento = eventoRepository.findById(id).orElse(null);
+        if (evento != null) {
+            model.addAttribute("evento", evento);
+            return "evento_editar"; 
+        } else {
+            return "redirect:/eventos";
+        }
+    }
+
+    @PostMapping("/eventos/editar/{id}")
+    public String actualizarEvento(@PathVariable("id") Long id, @ModelAttribute Evento evento) {
+        Evento eventoExistente = eventoRepository.findById(id).orElse(null);
+        if (eventoExistente != null) {
+            eventoExistente.setNombre(evento.getNombre());
+            eventoExistente.setDescripcion(evento.getDescripcion());
+            eventoExistente.setFecha(evento.getFecha());
+            eventoExistente.setUbicacion(evento.getUbicacion());
+            eventoExistente.setLikes(evento.getLikes());
+            eventoRepository.save(eventoExistente);
+        }
         return "redirect:/eventos";
     }
 
+    @PostMapping("/eventos/eliminar/{id}")
+    public String borrarEvento(@PathVariable("id") Long id) {
+        eventoRepository.deleteById(id);
+        return "redirect:/eventos";
+    }
 }
