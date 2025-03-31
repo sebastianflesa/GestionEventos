@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-eventos
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: eventosbd
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+   environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: eventosdb
+      MYSQL_USER: eventosdb
+      MYSQL_PASSWORD: 123456

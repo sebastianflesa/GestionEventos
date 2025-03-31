@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/","/login", "/registro","/eventos" ,"/css/**", "/js/**").permitAll()
+                .requestMatchers("/","/login", "/registro","/eventos" ,"/css/**", "/js/**","/images/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -47,6 +47,20 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
+            ).headers(headers -> headers
+                .contentSecurityPolicy(csp -> csp
+                .policyDirectives("default-src 'self'; " +
+                          "script-src 'self'; " +
+                          "style-src 'self'; " +
+                          "img-src 'self' data:; " +
+                          "font-src 'self'; " +
+                          "connect-src 'self'; " +
+                          "media-src 'self'; " +
+                          "frame-src 'self'; " +
+                          "frame-ancestors 'self'; " +
+                          "form-action 'self'; " +
+                          "object-src 'none';")
+                )
             )
             .build();
     }
