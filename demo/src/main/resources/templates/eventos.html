@@ -50,7 +50,7 @@
                         data-fecha=${evento.fecha},
                         data-likes=${evento.likes}">
                 <div class="card h-100 border-0 shadow-sm bg-dark text-white">
-                    <img th:src="@{/images/placeholder.webp}" class="card-img-top" alt="Imagen del evento" style="height: 200px; object-fit: cover;">
+                    <img th:src="@{/images/placeholder.webp}" class="card-img-top imagen-evento" alt="Imagen del evento" >
         
                     <div class="card-body d-flex flex-column justify-content-between">
                         <p class="text-info fw-semibold mb-1" th:text="${#temporals.format(evento.fecha, 'dd MMM yyyy')}">Fecha</p>
@@ -80,7 +80,7 @@
                         data-fecha=${evento.fecha},
                         data-likes=${evento.likes}">
                 <div class="card h-100 border-0 shadow-sm bg-dark text-white position-relative">
-                    <img  th:src="@{/images/placeholder.webp}" class="card-img-top" alt="Imagen del evento" style="height: 200px; object-fit: cover;">
+                    <img  th:src="@{/images/placeholder.webp}" class="card-img-top imagen-evento" alt="Imagen del evento">
         
                     <div class="position-absolute top-0 end-0 bg-danger px-3 py-1 rounded-bottom-start text-white fw-bold">
                         <i class="bi bi-heart-fill"></i>
@@ -109,37 +109,20 @@
                 <!-- Columna izquierda -->
                 <div class="col-md-6 text-center text-md-end mb-3 mb-md-0">
                     <h3>Publicidad 1</h3>
-                    <img class="img-fluid rounded" alt="Banner Publicidad Izquierda" style="max-height: 150px;">
+                    <img class="img-fluid rounded" alt="Banner Publicidad Izquierda" >
                 </div>
                 <!-- Columna derecha -->
                 <div class="col-md-6 text-center text-md-start">
                     <h3>Publicidad 2</h3>
-                    <img  class="img-fluid rounded" alt="Banner Publicidad Derecha" style="max-height: 150px;">
+                    <img  class="img-fluid rounded" alt="Banner Publicidad Derecha" >
                 </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.getElementById('filtroEventos').addEventListener('input', function () {
-            const filtro = this.value.toLowerCase();
-            document.querySelectorAll('.evento').forEach(evento => {
-                const nombre = evento.getAttribute('data-nombre');
-                const desc = evento.getAttribute('data-desc');
-                const fecha = evento.getAttribute('data-fecha');
-                const likes = evento.getAttribute('data-likes');
-
-                const coincide = nombre.includes(filtro) ||
-                                desc.includes(filtro) ||
-                                fecha.includes(filtro) ||
-                                likes.includes(filtro);
-
-                evento.style.display = coincide ? 'block' : 'none';
-            });
-        });
-    </script>
-
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+
 
     </body>
     </html>
