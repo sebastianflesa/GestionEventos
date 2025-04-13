@@ -4,7 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Eventos Gamer - Inicio</title>
+        <link rel="stylesheet" th:href="@{/css/icons.css}">
+        <link rel="stylesheet" th:href="@{/css/bootsrap-icons.css}">
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        
 
     </head>
     <body class="bg-dark text-white">
@@ -50,7 +53,7 @@
                         data-fecha=${evento.fecha},
                         data-likes=${evento.likes}">
                 <div class="card h-100 border-0 shadow-sm bg-dark text-white">
-                    <img th:src="@{/images/placeholder.webp}" class="card-img-top imagen-evento" alt="Imagen del evento" >
+                    <img th:src="@{${evento.imagen} + '?v=' + ${#dates.createNow().time}}"  class="card-img-top imagen-evento" alt="Imagen del evento" >
         
                     <div class="card-body d-flex flex-column justify-content-between">
                         <p class="text-info fw-semibold mb-1" th:text="${#temporals.format(evento.fecha, 'dd MMM yyyy')}">Fecha</p>
@@ -63,6 +66,10 @@
                     </div>
         
                     <div class="card-footer bg-transparent border-0 text-end">
+                        <a th:href="'https://wa.me/?text=¡Revisa este evento gamer! http://localhost:8080/eventos/ver/' + ${evento.id}" 
+                            target="_blank" class="btn btn-sm btn-success" title="Compartir por WhatsApp">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
                         <a th:href="@{'/eventos/ver/' + ${evento.id}}" class="btn btn-outline-light btn-sm">Ver más</a>
                     </div>
                 </div>
@@ -80,7 +87,7 @@
                         data-fecha=${evento.fecha},
                         data-likes=${evento.likes}">
                 <div class="card h-100 border-0 shadow-sm bg-dark text-white position-relative">
-                    <img  th:src="@{/images/placeholder.webp}" class="card-img-top imagen-evento" alt="Imagen del evento">
+                    <img th:src="@{${evento.imagen} + '?v=' + ${#dates.createNow().time}}"  class="card-img-top imagen-evento" alt="Imagen del evento" >
         
                     <div class="position-absolute top-0 end-0 bg-danger px-3 py-1 rounded-bottom-start text-white fw-bold">
                         <i class="bi bi-heart-fill"></i>
@@ -96,8 +103,15 @@
                     </div>
         
                     <div class="card-footer bg-transparent border-0 text-end">
+                        <a th:href="'https://wa.me/?text=¡Revisa este evento gamer! http://localhost:8080/eventos/ver/' + ${evento.id}" 
+                               target="_blank" class="btn btn-sm btn-success" title="Compartir por WhatsApp">
+                                <i class="bi bi-whatsapp"></i>
+                        </a>
                         <a th:href="@{'/eventos/ver/' + ${evento.id}}" class="btn btn-outline-light btn-sm">Ver más</a>
+                        
                     </div>
+                    
+                    
                 </div>
             </div>
         </div>

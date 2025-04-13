@@ -31,7 +31,8 @@
         <div class="col-md-8 bg-secondary p-4 rounded">
             <h3 class="text-center mb-4">Crear Nuevo Evento</h3>
 
-            <form th:action="@{/eventos/nuevo}" method="post" th:object="${evento}">
+            <form th:action="@{/eventos/nuevo}" method="post" enctype="multipart/form-data" th:object="${evento}">
+
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required>
@@ -58,8 +59,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="imagen" class="form-label">URL de Imagen</label>
-                    <input type="text" th:field="*{imagen}" class="form-control" id="imagen">
+                    <label class="form-label">Imagen (opcional):</label>
+                    <input type="file" class="form-control" name="imagenFile" />
+                    <div class="mt-2 text-center">
+                        <img th:if="${evento.imagen != null}" th:src="@{${evento.imagen}}" class="img-fluid rounded" alt="Imagen del evento" style="max-height: 200px;">
+                    </div>
                 </div>
 
                 <div class="text-end">
