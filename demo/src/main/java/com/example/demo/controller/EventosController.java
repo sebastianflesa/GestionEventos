@@ -53,7 +53,7 @@ public class EventosController {
         return "evento_nuevo";
     }
 
-     @PostMapping("/eventos/nuevo")
+    @PostMapping("/eventos/nuevo")
     public String guardarEvento(@ModelAttribute Evento evento, @RequestParam("imagenFile") MultipartFile imagenFile) throws IOException {
        if (!imagenFile.isEmpty()) {
             String nombreArchivo = UUID.randomUUID().toString() + "_" + imagenFile.getOriginalFilename();

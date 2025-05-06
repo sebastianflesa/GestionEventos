@@ -73,4 +73,8 @@ public class User implements UserDetails {
     public void setPassword(String encode) {
         this.password = encode;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

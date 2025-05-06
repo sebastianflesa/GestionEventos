@@ -10,9 +10,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "gamerSecret123gamerSecret123gamerSecret123"; // al menos 256 bits para HS256
-    private static final long EXPIRATION_TIME = 86400000L; // 24 horas
-
+    private static final String SECRET_KEY = "gamerSecret123gamerSecret123gamerSecret123";
+    private static final long EXPIRATION_TIME = 86400000L;
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
